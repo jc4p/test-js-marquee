@@ -1,8 +1,8 @@
 const parseStyleFormat = (str) => Number(str.replace('px', ''));
 const styleFormat = (str) => `${str}px`;
 
-const initMarquee = () => {
-  const banner = document.querySelector('.banner');
+const initMarquee = (selector) => {
+  const banner = document.querySelector(selector);
 
   const bannerWidth = banner.clientWidth;
   const bannerHeight = banner.clientHeight;
@@ -64,4 +64,6 @@ const initMarquee = () => {
   requestAnimationFrame(callback);
 };
 
-initMarquee();
+initMarquee('.banner');
+initMarquee('.banner-1');
+initMarquee('.banner-2');

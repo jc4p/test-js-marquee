@@ -12,13 +12,20 @@ body {
   margin: 0;
 }
 
-.banner {
+.banner, .banner-1, .banner-2 {
   height: 36px;
-  background: #e2eaeb;
+  background: #E2EAEB;
   display: flex;
   align-items: center;
   overflow-x: hidden;
   position: relative;
+}
+
+.banner-1 {
+  background: #F4E1E6;
+}
+.banner-2 {
+  background: #EFE1CE;
 }
 
 .banner-item {
