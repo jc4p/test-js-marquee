@@ -12,7 +12,7 @@ body {
   margin: 0;
 }
 
-.banner, .banner-1, .banner-2 {
+.banner, .banner-1, .banner-2, .banner-3 {
   height: 36px;
   background: #E2EAEB;
   display: flex;
