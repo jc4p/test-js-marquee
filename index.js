@@ -1,6 +1,3 @@
-// Import stylesheets
-import './style.css';
-
 const parseStyleFormat = (str) => Number(str.replace('px', ''));
 const styleFormat = (str) => `${str}px`;
 
