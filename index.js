@@ -30,7 +30,7 @@ const initMarquee = (selector) => {
 
   // make them all absolutely positioned
   for (let el of nodeElements) {
-    const oldBounds = el.getClientRects()[0];
+    const oldBounds = el.getBoundingClientRect();
     requestAnimationFrame(() => {
       el.style.position = 'absolute';
       el.style['min-width'] = styleFormat(itemWidth);
