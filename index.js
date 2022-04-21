@@ -28,6 +28,8 @@ const initMarquee = (selector) => {
     nodeElements.push(newElement);
   }
 
+  const containerTop = banner.getBoundingClientRect().top;
+
   // make them all absolutely positioned
   for (let el of nodeElements) {
     const oldBounds = el.getBoundingClientRect();
@@ -36,7 +38,7 @@ const initMarquee = (selector) => {
       el.style['min-width'] = styleFormat(itemWidth);
       el.style['max-height'] = styleFormat(itemHeight);
       el.style.left = styleFormat(Math.floor(oldBounds.left));
-      el.style.top = styleFormat(Math.floor(oldBounds.top));
+      el.style.top = styleFormat(Math.floor(oldBounds.top) - containerTop);
     });
   }
 
