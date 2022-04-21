@@ -22,7 +22,7 @@ body {
 }
 
 .banner-item {
-  margin-right: 25px;
+  padding-right: 20px;
   flex-shrink: 0;
 }
 
