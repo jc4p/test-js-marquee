@@ -69,3 +69,4 @@ const initMarquee = (selector) => {
 initMarquee('.banner');
 initMarquee('.banner-1');
 initMarquee('.banner-2');
+initMarquee('.banner-3');
