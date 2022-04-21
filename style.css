@@ -1,0 +1,32 @@
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Teko', sans-serif;
+  color: #030303;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+.banner {
+  height: 36px;
+  background: #e2eaeb;
+  display: flex;
+  align-items: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.banner-item {
+  margin-right: 25px;
+  flex-shrink: 0;
+}
+
+h4 {
+  margin: 0;
+  letter-spacing: -0.5px;
+}
