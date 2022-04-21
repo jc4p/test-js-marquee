@@ -52,11 +52,9 @@ const initMarquee = () => {
 
     const firstLeft = parseStyleFormat(nodeElements[0].style.left);
     if (firstLeft < -itemWidth) {
-      const furthestElementLeft = parseStyleFormat(
-        nodeElements[nodeElements.length - 1].style.left
-      );
+      const furthestBoundingBox = nodeElements[nodeElements.length - 1].getClientRects()[0]
       const first = nodeElements.shift();
-      first.style.left = styleFormat(furthestElementLeft + itemWidth);
+      first.style.left = styleFormat(furthestBoundingBox.left + furthestBoundingBox.width);
       nodeElements.push(first);
     }
 
