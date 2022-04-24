@@ -1,7 +1,7 @@
 const parseStyleFormat = (str) => Number(str.replace('px', ''));
 const styleFormat = (str) => `${str}px`;
 
-const initMarquee = (selector, opts = {}) => {
+const initMarquee = (selector, opts) => {
   const banner = document.querySelector(selector);
 
   const bannerWidth = banner.clientWidth;
@@ -14,7 +14,7 @@ const initMarquee = (selector, opts = {}) => {
 
   const minAmount = Math.ceil(bannerWidth / itemWidth);
 
-  const spacing = opts.spacing || 20;
+  let spacing = opts && opts.spacing !== undefined ? opts.spacing : 30;
 
   // add the clones
   const nodeElements = [bannerItem];
@@ -67,7 +67,7 @@ const initMarquee = (selector, opts = {}) => {
 
 window.setTimeout(() => {
   initMarquee('.banner');
-  initMarquee('.banner-1');
-  initMarquee('.banner-2');
-  initMarquee('.banner-3');
-}, 75)
+  initMarquee('.banner-1', { spacing: 60 });
+  initMarquee('.banner-2', { spacing: 10 });
+  initMarquee('.banner-3', { spacing: 100 });
+}, 150)
