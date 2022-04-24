@@ -1,24 +1,20 @@
 const parseStyleFormat = (str) => Number(str.replace('px', ''));
 const styleFormat = (str) => `${str}px`;
 
-const initMarquee = (selector) => {
+const initMarquee = (selector, opts = {}) => {
   const banner = document.querySelector(selector);
 
   const bannerWidth = banner.clientWidth;
-  const bannerHeight = banner.clientHeight;
 
   const bannerItem = banner.firstElementChild;
-  const itemWidth = bannerItem.offsetWidth + 1;
+  let itemWidth = bannerItem.offsetWidth + 1;
   const itemHeight = bannerItem.clientHeight;
-
-  console.log(`total size: ${bannerWidth} x ${bannerHeight}`);
-  console.log(`item size: ${itemWidth} x ${itemHeight}`);
 
   bannerItem.style.width = itemWidth;
 
   const minAmount = Math.ceil(bannerWidth / itemWidth);
 
-  console.log(`going to clone ${minAmount} times`);
+  const spacing = opts.spacing || 20;
 
   // add the clones
   const nodeElements = [bannerItem];
@@ -29,16 +25,19 @@ const initMarquee = (selector) => {
   }
 
   const containerTop = banner.getBoundingClientRect().top;
+  const nodeTop = nodeElements[0].getBoundingClientRect().top
 
   // make them all absolutely positioned
-  for (let el of nodeElements) {
-    const oldBounds = el.getBoundingClientRect();
+  for (let i = 0; i < nodeElements.length; i++) {
+    const el = nodeElements[i]
     requestAnimationFrame(() => {
+      const thisLeft = i == 0 ? 0 : (itemWidth + spacing) * i;
+
       el.style.position = 'absolute';
       el.style['min-width'] = styleFormat(itemWidth);
       el.style['max-height'] = styleFormat(itemHeight);
-      el.style.left = styleFormat(Math.floor(oldBounds.left));
-      el.style.top = styleFormat(Math.floor(oldBounds.top) - containerTop);
+      el.style.left = styleFormat(thisLeft);
+      el.style.top = styleFormat(nodeTop - containerTop);
     });
   }
 
@@ -52,11 +51,11 @@ const initMarquee = (selector) => {
       node.style.left = styleFormat(newLeft);
     });
 
-    const firstLeft = parseStyleFormat(nodeElements[0].style.left);
-    if (firstLeft < -itemWidth) {
-      const furthestBoundingBox = nodeElements[nodeElements.length - 1].getClientRects()[0]
+    const firstRight = nodeElements[0].getBoundingClientRect().right;
+    if (firstRight < 0) {
+      const furthestBoundingBox = nodeElements[nodeElements.length - 1].getBoundingClientRect()
       const first = nodeElements.shift();
-      first.style.left = styleFormat(furthestBoundingBox.left + furthestBoundingBox.width);
+      first.style.left = styleFormat(furthestBoundingBox.right + spacing);
       nodeElements.push(first);
     }
 
@@ -66,7 +65,9 @@ const initMarquee = (selector) => {
   requestAnimationFrame(callback);
 };
 
-initMarquee('.banner');
-initMarquee('.banner-1');
-initMarquee('.banner-2');
-initMarquee('.banner-3');
+window.setTimeout(() => {
+  initMarquee('.banner');
+  initMarquee('.banner-1');
+  initMarquee('.banner-2');
+  initMarquee('.banner-3');
+}, 75)
